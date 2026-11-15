@@ -1,0 +1,14 @@
+{
+  "name": "sky-check-weather",
+  "version": "1.0.0",
+  "description": "current weather page using one rest api call",
+  "scripts": {
+    "start": "lite-server --baseDir=."
+  },
+  "author": "Uzma Moin",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}

@@ -1,0 +1,300 @@
+/* ==========================================================
+   sky check - stylesheet
+   mobile first: the base styles are for phones and the
+   min-width media query adds layout for larger screens
+   ========================================================== */
+
+/* ---------- css reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- weather themes (set on the body by the script) ---------- */
+body[data-theme='clear'] {
+  --sky-top: #2f80ed;
+  --sky-bottom: #56ccf2;
+}
+
+body[data-theme='cloudy'] {
+  --sky-top: #52616b;
+  --sky-bottom: #8e9eab;
+}
+
+body[data-theme='rain'] {
+  --sky-top: #243b55;
+  --sky-bottom: #4b79a1;
+}
+
+body[data-theme='snow'] {
+  --sky-top: #4b6cb7;
+  --sky-bottom: #a8bde6;
+}
+
+body[data-theme='night'] {
+  --sky-top: #0b1a2b;
+  --sky-bottom: #2c5364;
+}
+
+/* ---------- base ---------- */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, 'segoe ui', roboto, 'helvetica neue', arial, sans-serif;
+  line-height: 1.5;
+  color: #ffffff;
+  background: linear-gradient(160deg, var(--sky-top), var(--sky-bottom));
+}
+
+/* ---------- header ---------- */
+.site-header {
+  padding: 2.5rem 1rem 1.25rem;
+  text-align: center;
+}
+
+.site-header h1 {
+  font-size: 2.25rem;
+  letter-spacing: 0.04em;
+}
+
+.tagline {
+  opacity: 0.85;
+}
+
+/* ---------- main layout ---------- */
+.site-main {
+  flex: 1;
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+/* ---------- controls ---------- */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.control label,
+.control > span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+}
+
+select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+}
+
+/* options sit on a white menu, so give them dark text */
+select option {
+  color: #1d2a3a;
+}
+
+.unit-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.unit-button {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.unit-button[aria-pressed='true'] {
+  background-color: #ffffff;
+  color: #1d2a3a;
+  font-weight: 700;
+}
+
+select:focus-visible,
+.unit-button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* ---------- weather card ---------- */
+.weather-card {
+  padding: 1.75rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* only show the part of the card that matches the current state */
+.weather-card[data-state='loading'] .weather-body,
+.weather-card[data-state='error'] .weather-body {
+  display: none;
+}
+
+.weather-card[data-state='ready'] .message {
+  display: none;
+}
+
+.message {
+  padding: 2.5rem 0;
+}
+
+.weather-card[data-state='loading'] .message {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* fade in each time new weather is shown */
+.weather-card[data-state='ready'] .weather-body {
+  animation: fade-in 0.5s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.place {
+  font-size: 1.6rem;
+}
+
+.local-time {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.weather-icon {
+  width: 8rem;
+  height: 8rem;
+  margin: 0.5rem auto 0;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+}
+
+.temperature {
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.description {
+  margin: 0.5rem 0 1.5rem;
+  font-size: 1.2rem;
+}
+
+/* ---------- detail tiles ---------- */
+.details {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.details li {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  border-radius: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.detail-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+.detail-value {
+  font-size: 1.1rem;
+}
+
+/* ---------- footer ---------- */
+.site-footer {
+  padding: 1.5rem 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.site-footer a {
+  color: inherit;
+}
+
+/* ==========================================================
+   larger screens (600px and up)
+   ========================================================== */
+@media (min-width: 600px) {
+  .controls {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .control:first-child {
+    flex: 1;
+  }
+
+  .site-header h1 {
+    font-size: 3rem;
+  }
+
+  .details {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* people who prefer less motion get no animations */
+@media (prefers-reduced-motion: reduce) {
+  .weather-card[data-state='loading'] .message,
+  .weather-card[data-state='ready'] .weather-body {
+    animation: none;
+  }
+}

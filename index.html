@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Uzma Moin">
+    <meta name="description" content="current weather for four cities, powered by weatherapi.com.">
+    <title>sky check | current weather</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+
+  <body data-theme="clear">
+    <!-- page header -->
+    <header class="site-header">
+      <h1>sky check</h1>
+      <p class="tagline">current weather around the world</p>
+    </header>
+
+    <main class="site-main">
+      <!-- controls: city dropdown and unit toggle -->
+      <section class="controls" aria-label="weather controls">
+        <div class="control">
+          <label for="city-select">choose a city</label>
+          <select id="city-select" name="city">
+            <option value="Toronto">toronto, canada</option>
+            <option value="Mumbai">mumbai, india</option>
+            <option value="Sydney">sydney, australia</option>
+            <option value="Reykjavik">reykjavik, iceland</option>
+          </select>
+        </div>
+
+        <div class="control">
+          <span id="unit-label">temperature unit</span>
+          <div class="unit-toggle" role="group" aria-labelledby="unit-label">
+            <button type="button" class="unit-button" data-unit="c" aria-pressed="true">&deg;c</button>
+            <button type="button" class="unit-button" data-unit="f" aria-pressed="false">&deg;f</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- weather card: the script fills in the text and the icon -->
+      <section id="weather-card" class="weather-card" data-state="loading" aria-live="polite">
+        <p id="message" class="message">loading weather...</p>
+
+        <div class="weather-body">
+          <h2 id="place" class="place"></h2>
+          <p id="local-time" class="local-time"></p>
+
+          <img id="weather-icon" class="weather-icon" src="" alt="" width="128" height="128">
+
+          <p id="temperature" class="temperature"></p>
+          <p id="description" class="description"></p>
+
+          <ul class="details">
+            <li>
+              <span class="detail-label">feels like</span>
+              <strong id="feels-like" class="detail-value"></strong>
+            </li>
+            <li>
+              <span class="detail-label">humidity</span>
+              <strong id="humidity" class="detail-value"></strong>
+            </li>
+            <li>
+              <span class="detail-label">wind</span>
+              <strong id="wind" class="detail-value"></strong>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <!-- page footer -->
+    <footer class="site-footer">
+      <p>weather data by <a href="https://www.weatherapi.com/" target="_blank" rel="noopener">weatherapi.com</a></p>
+      <p>built by Uzma Moin</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
