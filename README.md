@@ -13,12 +13,6 @@ a short description and the weather icon for the city picked in the dropdown.
 - remembers the last city and unit
 - loading and error messages, mobile first layout
 
-## setup
-
-1. get a free key at https://www.weatherapi.com/signup.aspx
-2. open `js/main.js` and replace `YOUR_API_KEY_HERE` with your key
-3. open `index.html` in a browser (or run `npm install` then `npm start`)
-
 ## structure
 
 - index.html
